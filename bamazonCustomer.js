@@ -63,7 +63,7 @@ function start() {
                                 function (err) {
                                     if (err) throw err;
                                     var total = answer.quantity * chosenItem.price;
-                                    console.log("Order successful! Total cost is: " + total);
+                                    console.log("Order successful! Total cost is: $" + total);
                                     start();
                                 }
                             );
