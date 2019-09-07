@@ -18,12 +18,12 @@ function start() {
     connection.query("SELECT * FROM products", function (err, res) {
                 if (err) throw err;
                 inquirer.prompt([{
-                            name: "item",
-                            type: "input",
+                            name: "choice",
+                            type: "rawlist",
                             choices: function () {
                                 var choiceArray = [];
                                 for (i = 0; i < res.length; i++) {
-                                    choiceArray.push(res[i].item_id);
+                                    choiceArray.push(res[i].product_name);
                                 }
                                 return choiceArray;
                             },
@@ -44,7 +44,7 @@ function start() {
                     .then(function (answer) {
                         var chosenItem;
                         for (i = 0; i < res.length; i++) {
-                            if (res[i].item_id === answer.item) {
+                            if (res[i].product_name === answer.choice) {
                                 chosenItem = res[i];
                             }
                         }
@@ -52,7 +52,7 @@ function start() {
                             connection.query(
                                 "UPDATE products SET ? WHERE ?",
                                 [{
-                                        stock_quantity: stock_quantity - answer.quantity
+                                        stock_quantity: answer.quantity
                                     },
                                     {
                                         item_id: chosenItem.id
