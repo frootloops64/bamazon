@@ -16,6 +16,7 @@ connection.connect(function (err) {
 
 function start() {
     connection.query("SELECT * FROM products", function (err, res) {
+        console.table(res);
                 if (err) throw err;
                 inquirer.prompt([{
                             name: "choice",
@@ -49,18 +50,20 @@ function start() {
                             }
                         }
                         if (chosenItem.stock_quantity > parseInt(answer.quantity)) {
+                            var deducted = chosenItem.stock_quantity - answer.quantity;
                             connection.query(
                                 "UPDATE products SET ? WHERE ?",
                                 [{
-                                        stock_quantity: answer.quantity
+                                        stock_quantity: deducted
                                     },
                                     {
-                                        item_id: chosenItem.id
+                                        item_id: chosenItem.item_id
                                     }
                                 ],
                                 function (err) {
                                     if (err) throw err;
-                                    console.log("Order successful!");
+                                    var total = answer.quantity * chosenItem.price;
+                                    console.log("Order successful! Total cost is: " + total);
                                     start();
                                 }
                             );
