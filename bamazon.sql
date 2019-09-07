@@ -12,4 +12,10 @@ create table products(
 );
 
 insert into products(product_name, department_name, price, stock_quantity)
-values ("")
+values ("Rolex Oyster Perpetual", "Luxury Watches", 7000, 5),
+("Samsung Galaxy S10", "Mobile Phones", 1500, 10),
+("Razer Death Adder", "Computers and Electronics", 50, 50),
+("AMD Ryzen 3 1200", "Computers and Electronics", 120, 20),
+("Casio Mud Master", "Watches", 200, 20),
+("Wilson Pro Staff RF97", "Sporting Goods", 250, 10),
+("Yonex Astrox 88s", "Sporting Goods", 200, 10);
